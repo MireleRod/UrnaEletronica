@@ -9,5 +9,7 @@ package br.com.poo.model;
  * @author 232.975909
  */
 public enum TipoVoto {
-    
+    VALIDO,
+    BRANCO,
+    NULO
 }
