@@ -9,5 +9,19 @@ package br.com.poo.model;
  * @author 232.975909
  */
 public class Voto {
-    
+    private int numeroDigitado;
+    private TipoVoto tipo;
+
+    public Voto(int numeroDigitado, TipoVoto tipo) {
+        this.numeroDigitado = numeroDigitado;
+        this.tipo = tipo;
+    }
+
+    public int getNumeroDigitado() {
+        return numeroDigitado;
+    }
+
+    public TipoVoto getTipo() {
+        return tipo;
+    }
 }
