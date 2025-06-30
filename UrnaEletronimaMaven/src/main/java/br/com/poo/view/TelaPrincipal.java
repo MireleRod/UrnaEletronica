@@ -4,11 +4,13 @@
  */
 package br.com.poo.view;
 
+import br.com.poo.Controller.ControladorUrna;
+
 /**
  *
  * @author 232.984669
  */
-import br.com.poo.controller.urnaController;
+
 
 
 public class TelaPrincipal extends javax.swing.JFrame {
@@ -501,7 +503,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private urnaController controller = new urnaController();
+    private ControladorUrna controller = new ControladorUrna();
     
     public String buscarPartido(String codigo) {
     if (codigo.equals("91")) {

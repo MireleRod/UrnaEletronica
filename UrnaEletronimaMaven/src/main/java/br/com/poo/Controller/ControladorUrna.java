@@ -1,17 +1,19 @@
+package br.com.poo.Controller;
+
+
+import br.com.poo.model.Candidato;
+import br.com.poo.model.TipoVoto;
+import br.com.poo.model.Voto;
 import java.util.List;
-import model.BancoDeDadosFake;
-import model.Candidato;
-import model.TipoVoto;
-import model.Voto;
 
 public class ControladorUrna {
 
     private String numeroDigitado = "";
-    private BancoDeDadosFake banco;
-
-    public ControladorUrna(BancoDeDadosFake banco) {
-        this.banco = banco;
-    }
+//    private BancoDeDadosFake banco;
+//
+//    public ControladorUrna(BancoDeDadosFake banco) {
+//        this.banco = banco;
+//    }
 
     // Chamada quando o usuário pressiona um número
     public void digitarNumero(String numero) {
@@ -78,5 +80,3 @@ public class ControladorUrna {
     }
 }
 
-
-} 
