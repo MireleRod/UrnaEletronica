@@ -8,13 +8,14 @@ package br.com.poo.model;
  *
  * @author 232.975909
  */
+
 public class Candidato {
     private int numero;
     private String nome;
-    private String partido;
+    private Partido partido;
     private String caminhoImagem;
 
-    public Candidato(int numero, String nome, String partido, String caminhoImagem) {
+    public Candidato(int numero, String nome, Partido partido, String caminhoImagem) {
         this.numero = numero;
         this.nome = nome;
         this.partido = partido;
@@ -29,7 +30,7 @@ public class Candidato {
         return nome;
     }
 
-    public String getPartido() {
+    public Partido getPartido() {
         return partido;
     }
 
@@ -37,6 +38,3 @@ public class Candidato {
         return caminhoImagem;
     }
 }
-
-    
-

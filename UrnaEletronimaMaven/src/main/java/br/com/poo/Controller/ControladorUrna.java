@@ -28,6 +28,14 @@ public class ControladorUrna {
         limparNumero(); // Limpa após votar em branco
     }
 
+    public String confirmar() {
+    if (numeroDigitado.equals("99999")) {
+        return "FINALIZAR";
+    }
+    confirmarVoto(); // chama o método real que grava o voto
+    return "OK";
+}
+
     public void confirmarVoto() {
         if (numeroDigitado.equals("99999")) {
             // sinaliza que é para abrir o relatório, o tratamento ocorre na tela

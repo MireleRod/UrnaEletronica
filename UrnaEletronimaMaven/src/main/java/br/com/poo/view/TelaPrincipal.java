@@ -4,14 +4,12 @@
  */
 package br.com.poo.view;
 
-import br.com.poo.Controller.ControladorUrna;
-
 /**
  *
  * @author 232.984669
  */
 
-
+import br.com.poo.controller.ControladorUrna;
 
 public class TelaPrincipal extends javax.swing.JFrame {
 
@@ -21,6 +19,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         
         initComponents();
+        controller = new ControladorUrna();
         
         jLabeTitulo.setVisible(false);
         jLabelPartido.setVisible(false);
@@ -521,14 +520,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 }
     
-    private String verificarPartido(String numero) {
+ /*   private String verificarPartido(String numero) {
     if (numero.startsWith("91")) return "PEsp";
     else if (numero.startsWith("92")) return "PMus";
     else if (numero.startsWith("93")) return "PProf";
     else if (numero.startsWith("94")) return "PFest";
     else if (numero.startsWith("95")) return "PFolc";
     else return null;
-}
+} */
     
     private void atualizarCampos() {
     String numero = controller.getNumeroDigitado();
@@ -598,57 +597,57 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
       
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-            controller.votoBranco();
+            controller.votarBranco();
             atualizarCampos();
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        controller.digitarNumero("0");
+        controller.adicionarDigito("0");
         atualizarCampos();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        controller.digitarNumero("9");
+        controller.adicionarDigito("9");
         atualizarCampos();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        controller.digitarNumero("8");
+        controller.adicionarDigito("8");
         atualizarCampos();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        controller.digitarNumero("7");
+        controller.adicionarDigito("7");
         atualizarCampos();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        controller.digitarNumero("6");
+        controller.adicionarDigito("6");
         atualizarCampos();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        controller.digitarNumero("5");
+        controller.adicionarDigito("5");
         atualizarCampos();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        controller.digitarNumero("4");
+        controller.adicionarDigito("4");
         atualizarCampos();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        controller.digitarNumero("3");
+        controller.adicionarDigito("3");
         atualizarCampos();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        controller.digitarNumero("2");
+        controller.adicionarDigito("2");
         atualizarCampos();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        controller.digitarNumero("1");
+        controller.adicionarDigito("1");
         atualizarCampos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -686,12 +685,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        String resultado = controller.confirmarVoto();
+        String resultado = controller.confirmar();
         if ("FINALIZAR".equals(resultado)) {
         System.exit(0);
          }
-        controller.resetar();
-        atualizarCampos();
+       // controller.resetar();
+       // atualizarCampos();
     }//GEN-LAST:event_jButton12ActionPerformed
 
     /**

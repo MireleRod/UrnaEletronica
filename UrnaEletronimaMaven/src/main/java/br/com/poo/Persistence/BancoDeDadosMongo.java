@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author 232.975909
@@ -38,19 +37,21 @@ public class BancoDeDadosMongo {
     }
 
     public Candidato buscarCandidatoPorNumero(String numero) {
-        Document filtro = new Document("numero", numero);
-        Document doc = candidatosCollection.find(filtro).first();
+    Document filtro = new Document("numero", numero);
+    Document doc = candidatosCollection.find(filtro).first();
 
-        if (doc != null) {
-            String nome = doc.getString("nome");
-            String siglaPartido = doc.getString("siglaPartido");
-            String caminhoImagem = doc.getString("caminhoImagem");
+    if (doc != null) {
+        String nome = doc.getString("nome");
+        String siglaPartido = doc.getString("siglaPartido");
+        String caminhoImagem = doc.getString("caminhoImagem");
 
-            Partido partido = buscarPartidoPorSigla(siglaPartido);
-            return new Candidato(numero, nome, partido, caminhoImagem);
-        }
-        return null;
+        Partido partido = buscarPartidoPorSigla(siglaPartido);
+        int numeroInt = Integer.parseInt(numero); // conversão aqui
+        return new Candidato(numeroInt, nome, partido, caminhoImagem);
     }
+    return null;
+}
+
 
     public Partido buscarPartidoPorSigla(String sigla) {
         Document filtro = new Document("sigla", sigla);
@@ -76,13 +77,14 @@ public class BancoDeDadosMongo {
     public List<Candidato> getTodosCandidatos() {
         List<Candidato> candidatos = new ArrayList<>();
         for (Document doc : candidatosCollection.find()) {
-            String numero = doc.getString("numero");
+            int numero = Integer.parseInt(doc.getString("numero"));
             String nome = doc.getString("nome");
             String siglaPartido = doc.getString("siglaPartido");
             String caminhoImagem = doc.getString("caminhoImagem");
 
             Partido partido = buscarPartidoPorSigla(siglaPartido);
             candidatos.add(new Candidato(numero, nome, partido, caminhoImagem));
+
         }
         return candidatos;
     }
