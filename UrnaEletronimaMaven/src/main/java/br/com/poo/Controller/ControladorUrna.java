@@ -1,82 +1,73 @@
-package br.com.poo.Controller;
+package br.com.poo.controller;
 
-
-import br.com.poo.model.Candidato;
-import br.com.poo.model.TipoVoto;
-import br.com.poo.model.Voto;
+import br.com.poo.model.*;
+import br.com.poo.persistence.BancoDeDadosMongo;
 import java.util.List;
 
 public class ControladorUrna {
 
     private String numeroDigitado = "";
-//    private BancoDeDadosFake banco;
-//
-//    public ControladorUrna(BancoDeDadosFake banco) {
-//        this.banco = banco;
-//    }
+    private BancoDeDadosMongo bancoDeDados;
 
-    // Chamada quando o usuário pressiona um número
-    public void digitarNumero(String numero) {
+    public ControladorUrna() {
+        bancoDeDados = new BancoDeDadosMongo();
+    }
+
+    public void adicionarDigito(String digito) {
         if (numeroDigitado.length() < 5) {
-            numeroDigitado += numero;
+            numeroDigitado += digito;
         }
     }
 
-    // Corrige a digitação
     public void corrigir() {
         numeroDigitado = "";
     }
 
-    // Retorna o número atual digitado (para exibir na tela)
+    public void votarBranco() {
+        bancoDeDados.registrarVoto(new Voto("", TipoVoto.BRANCO));
+        limparNumero(); // Limpa após votar em branco
+    }
+
+    public void confirmarVoto() {
+        if (numeroDigitado.equals("99999")) {
+            // sinaliza que é para abrir o relatório, o tratamento ocorre na tela
+            return;
+        }
+
+        Candidato candidato = bancoDeDados.buscarCandidatoPorNumero(numeroDigitado);
+        if (candidato != null) {
+            bancoDeDados.registrarVoto(new Voto(numeroDigitado, TipoVoto.VALIDO));
+        } else {
+            bancoDeDados.registrarVoto(new Voto(numeroDigitado, TipoVoto.NULO));
+        }
+        limparNumero(); // Limpa após confirmar o voto
+    }
+
     public String getNumeroDigitado() {
         return numeroDigitado;
     }
 
-    // Verifica se o número digitado é de um candidato conhecido
     public Candidato buscarCandidato() {
-        try {
-            int numero = Integer.parseInt(numeroDigitado);
-            for (Candidato c : banco.getCandidatos()) {
-                if (c.getNumero() == numero) {
-                    return c;
-                }
-            }
-        } catch (NumberFormatException e) {
-            // nada
-        }
-        return null;
+        return bancoDeDados.buscarCandidatoPorNumero(numeroDigitado);
     }
 
-    // Chamada quando o botão CONFIRMA é pressionado
-    public String confirmar() {
-        if (numeroDigitado.equals("")) {
-            // Nenhum número digitado
-            return "Nada digitado.";
-        }
-
-        if (numeroDigitado.equals("99999")) {
-            // Comando especial para encerrar votação
-            return "ENCERRAR";
-        }
-
-        Candidato candidato = buscarCandidato();
-
-        if (candidato != null) {
-            banco.registrarVoto(new Voto(candidato.getNumero(), TipoVoto.VALIDO));
-            numeroDigitado = "";
-            return "VOTO_VALIDO";
-        } else {
-            banco.registrarVoto(new Voto(-1, TipoVoto.NULO));
-            numeroDigitado = "";
-            return "VOTO_NULO";
-        }
+    public List<Voto> getVotos() {
+        return bancoDeDados.getTodosVotos();
     }
 
-    // Chamada quando o botão BRANCO é pressionado
-    public String votarBranco() {
-        banco.registrarVoto(new Voto(-1, TipoVoto.BRANCO));
-        numeroDigitado = "";
-        return "VOTO_BRANCO";
+    public List<Candidato> getCandidatos() {
+        return bancoDeDados.getTodosCandidatos();
+    }
+
+    public List<Partido> getPartidos() {
+        return bancoDeDados.getTodosPartidos();
+    }
+
+    public void limparNumero() {
+        this.numeroDigitado = "";
     }
 }
+
+
+
 

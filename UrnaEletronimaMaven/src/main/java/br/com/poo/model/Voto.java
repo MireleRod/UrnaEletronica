@@ -12,7 +12,7 @@ public class Voto {
     private int numeroDigitado;
     private TipoVoto tipo;
 
-    public Voto(int numeroDigitado, TipoVoto tipo) {
+    public Voto(String numeroDigitado, TipoVoto tipo) {
         this.numeroDigitado = numeroDigitado;
         this.tipo = tipo;
     }
