@@ -4,11 +4,13 @@
  */
 package br.com.poo.view;
 
+import br.com.poo.Controller.ControladorUrna;
+
 /**
  *
  * @author 232.984669
  */
-import br.com.poo.controller.urnaController;
+
 
 
 public class TelaPrincipal extends javax.swing.JFrame {
@@ -314,7 +316,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jTextField5.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextField5.setBorder(javax.swing.BorderFactory.createLineBorder(null));
         jTextField5.setCaretColor(new java.awt.Color(255, 255, 255));
         jTextField5.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
@@ -325,7 +327,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jTextField1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(null));
         jTextField1.setCaretColor(new java.awt.Color(255, 255, 255));
         jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -336,7 +338,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jTextField3.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextField3.setBorder(javax.swing.BorderFactory.createLineBorder(null));
         jTextField3.setCaretColor(new java.awt.Color(255, 255, 255));
         jTextField3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
@@ -347,7 +349,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jTextField4.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextField4.setBorder(javax.swing.BorderFactory.createLineBorder(null));
         jTextField4.setCaretColor(new java.awt.Color(255, 255, 255));
         jTextField4.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
@@ -358,7 +360,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jTextField6.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextField6.setBorder(javax.swing.BorderFactory.createLineBorder(null));
         jTextField6.setCaretColor(new java.awt.Color(255, 255, 255));
         jTextField6.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
@@ -473,14 +475,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))))
+                .addContainerGap(75, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -503,7 +503,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private urnaController controller = new urnaController();
+    private ControladorUrna controller = new ControladorUrna();
     
     public String buscarPartido(String codigo) {
     if (codigo.equals("91")) {
