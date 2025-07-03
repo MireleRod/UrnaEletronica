@@ -8,16 +8,17 @@ package br.com.poo.model;
  *
  * @author 232.975909
  */
+
 public class Voto {
-    private int numeroDigitado;
+    private String numeroDigitado;
     private TipoVoto tipo;
 
-    public Voto(int numeroDigitado, TipoVoto tipo) {
+    public Voto(String numeroDigitado, TipoVoto tipo) {
         this.numeroDigitado = numeroDigitado;
         this.tipo = tipo;
     }
 
-    public int getNumeroDigitado() {
+    public String getNumeroDigitado() {
         return numeroDigitado;
     }
 
@@ -25,3 +26,4 @@ public class Voto {
         return tipo;
     }
 }
+
