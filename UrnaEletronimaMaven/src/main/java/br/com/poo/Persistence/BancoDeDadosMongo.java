@@ -6,7 +6,8 @@
  *
  * @author 232.975909
  */
-package br.com.poo.persistence;
+
+package br.com.poo.Persistence;
 
 import br.com.poo.model.*;
 import com.mongodb.client.*;
@@ -31,63 +32,73 @@ public class BancoDeDadosMongo {
     }
 
     public void registrarVoto(Voto voto) {
-        Document doc = new Document("numeroDigitado", voto.getNumeroDigitado())
-                .append("tipo", voto.getTipo().name());
-        votosCollection.insertOne(doc);
+            Document doc = new Document("numeroDigitado",
+                    voto.getNumeroDigitado() == null ? null : voto.getNumeroDigitado().toString())
+                    .append("tipo", voto.getTipo().toString());
+            votosCollection.insertOne(doc);
+
     }
 
     public Candidato buscarCandidatoPorNumero(String numero) {
-    Document filtro = new Document("numero", numero);
-    Document doc = candidatosCollection.find(filtro).first();
-
-    if (doc != null) {
-        String nome = doc.getString("nome");
-        String siglaPartido = doc.getString("siglaPartido");
-        String caminhoImagem = doc.getString("caminhoImagem");
-
-        Partido partido = buscarPartidoPorSigla(siglaPartido);
-        int numeroInt = Integer.parseInt(numero); // conversão aqui
-        return new Candidato(numeroInt, nome, partido, caminhoImagem);
-    }
-    return null;
-}
-
-
-    public Partido buscarPartidoPorSigla(String sigla) {
-        Document filtro = new Document("sigla", sigla);
-        Document doc = partidosCollection.find(filtro).first();
+        Document filtro = new Document("numero", Integer.parseInt(numero));
+        Document doc = candidatosCollection.find(filtro).first();
 
         if (doc != null) {
             String nome = doc.getString("nome");
-            return new Partido(nome, sigla);
+            String siglaPartido = doc.getString("siglaPartido");
+            String caminhoImagem = doc.getString("caminhoImagem");
+
+            Partido partido = buscarPartidoPorSigla(siglaPartido);
+            int numeroInt = Integer.parseInt(numero);
+            return new Candidato(numeroInt, nome, partido, caminhoImagem);
         }
         return null;
+    }
+
+    public Partido buscarPartidoPorSigla(String sigla) {
+        Document doc = partidosCollection.find(new Document("sigla", sigla)).first();
+        if (doc != null) {
+            String nome = doc.getString("nome");
+            String siglaPartido = doc.getString("sigla");
+            return new Partido(nome, siglaPartido);
+        }
+        return null;
+    }
+
+    public List<Candidato> getTodosCandidatos() {
+        List<Candidato> candidatos = new ArrayList<>();
+        for (Document doc : candidatosCollection.find()) {
+            int numero = doc.getInteger("numero");
+            String nome = doc.getString("nome");
+            String siglaPartido = doc.getString("siglaPartido");
+            String caminhoImagem = doc.getString("caminhoImagem");
+
+            Partido partido = buscarPartidoPorSigla(siglaPartido);
+            if (partido != null) {
+                candidatos.add(new Candidato(numero, nome, partido, caminhoImagem));
+            }
+        }
+        return candidatos;
     }
 
     public List<Voto> getTodosVotos() {
         List<Voto> votos = new ArrayList<>();
         for (Document doc : votosCollection.find()) {
-            String numeroDigitado = doc.getString("numeroDigitado");
+            Object numeroObj = doc.get("numeroDigitado");  // pega como Object
+            String numeroDigitado = null;
+            if (numeroObj != null) {
+                if (numeroObj instanceof Integer) {
+                    numeroDigitado = Integer.toString((Integer) numeroObj);
+                } else if (numeroObj instanceof String) {
+                    numeroDigitado = (String) numeroObj;
+                }
+            }
             TipoVoto tipo = TipoVoto.valueOf(doc.getString("tipo"));
             votos.add(new Voto(numeroDigitado, tipo));
         }
         return votos;
     }
 
-    public List<Candidato> getTodosCandidatos() {
-        List<Candidato> candidatos = new ArrayList<>();
-        for (Document doc : candidatosCollection.find()) {
-            int numero = Integer.parseInt(doc.getString("numero"));
-            String nome = doc.getString("nome");
-            String siglaPartido = doc.getString("siglaPartido");
-            String caminhoImagem = doc.getString("caminhoImagem");
-
-            Partido partido = buscarPartidoPorSigla(siglaPartido);
-            candidatos.add(new Candidato(numero, nome, partido, caminhoImagem));
-
-        }
-        return candidatos;
-    }
 
     public List<Partido> getTodosPartidos() {
         List<Partido> partidos = new ArrayList<>();
