@@ -1,7 +1,7 @@
-package br.com.poo.controller;
+package br.com.poo.Controller;
 
 import br.com.poo.model.*;
-import br.com.poo.persistence.BancoDeDadosMongo;
+import br.com.poo.Persistence.BancoDeDadosMongo;
 import java.util.List;
 
 public class ControladorUrna {
@@ -36,10 +36,10 @@ public class ControladorUrna {
     return "OK";
 }
 
-    public void confirmarVoto() {
+    public String confirmarVoto() {
+        System.out.println("Número digitado: " + numeroDigitado);
         if (numeroDigitado.equals("99999")) {
-            // sinaliza que é para abrir o relatório, o tratamento ocorre na tela
-            return;
+            return "FINALIZAR";
         }
 
         Candidato candidato = bancoDeDados.buscarCandidatoPorNumero(numeroDigitado);
@@ -48,7 +48,13 @@ public class ControladorUrna {
         } else {
             bancoDeDados.registrarVoto(new Voto(numeroDigitado, TipoVoto.NULO));
         }
-        limparNumero(); // Limpa após confirmar o voto
+
+        limparNumero();
+        return "OK";
+    }
+
+    public BancoDeDadosMongo getBanco() {
+        return bancoDeDados;
     }
 
     public String getNumeroDigitado() {
@@ -75,7 +81,3 @@ public class ControladorUrna {
         this.numeroDigitado = "";
     }
 }
-
-
-
-
